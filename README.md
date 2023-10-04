@@ -57,3 +57,19 @@ Mapping the variables correctly:
 | r | INR |
 | i | Creatinine |
 | o | Albumin |
+
+# SAFE Calculator
+
+```js
+calculateResults: function(t) {
+    this.touched || (this.touched = !0);
+    var e = 2.97 * t.age
+      , n = 5.99 * Math.min(t.bmi, 40)
+      , r = 62.85 * t.diabetes
+      , i = 154.85 * Math.log(Math.max(1, t.ast))
+      , o = 58.23 * Math.log(Math.max(1, t.alt))
+      , a = 195.48 * Math.log(Math.max(1, t.globulin))
+      , s = 141.61 * Math.log(Math.max(1, t.platelets));
+    this.safe = Math.round(e + n + r + i - o + a - s - 75)
+}
+```
