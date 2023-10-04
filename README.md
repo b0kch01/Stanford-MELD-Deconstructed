@@ -1,6 +1,13 @@
-# Stanford-MELD-Desconstructed
+<div align=center>
+  
+# Stanford Medical Calculators Deconstructed
 
-Calculator code:
+https://medcalculators.stanford.edu/meld
+
+</div>
+
+## MELD 3.0
+
 ```js
 methods: {
   calculateResults: function(t) {
@@ -33,32 +40,17 @@ Mapping the variables correctly:
 
 <!-- Create a table of all the variables in the function and their corresponding values -->
 
-### Original MELD
+| Letter | Original MELD | MELD-Na | MELD-3    |
+| ------ | ------------- | ------- | --------- |
+| `t`      | Creatinine    | Na      | Gender    |
+| `e`      | Bilirubin     | -       | Bilirubin |
+| `n`      | INR           | -       | Na        |
+| `r`      | -             | -       | INR       |
+| `i`      | -             | -       | Creatinine|
+| `o`      | -             | -       | Albumin   |
 
-| Letter | Name |
-| --- | --- |
-| t | Creatinine |
-| e | Bilirubin |
-| n | INR |
 
-### MELD-Na
-
-| Letter | Name |
-| --- | --- |
-| t | Na |
-
-### MELD-3
-
-| Letter | Name |
-| --- | --- |
-| t | Gender |
-| e | Bilirubin |
-| n | Na |
-| r | INR |
-| i | Creatinine |
-| o | Albumin |
-
-# SAFE Calculator
+## SAFE Calculator
 
 ```js
 calculateResults: function(t) {
