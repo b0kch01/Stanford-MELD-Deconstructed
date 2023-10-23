@@ -5,9 +5,9 @@
 #' @param inr
 #' @returns score (number)
 meld_original <- function(creatinine, bilirubin, inr) {
-  return (round(9.57 * log(pmax(1, min(4, creatinine))) + 
-          3.78 * log(pmax(1, bilirubin)) + 
-          11.2 * log(pmax(1, inr)) + 6.43))
+  return (round(9.57 * log(max(1, min(4, creatinine))) + 
+          3.78 * log(max(1, bilirubin)) + 
+          11.2 * log(max(1, inr)) + 6.43))
 }
 
 #' calculate MELD-Na score
@@ -21,7 +21,7 @@ meld_original <- function(creatinine, bilirubin, inr) {
 meld_na <- function(creatinine, bilirubin, inr, na) {
   original_score <- meld_original(creatinine, bilirubin, inr)
   if (original_score > 11) {
-    na_clamp <- 137 - min(137, pmax(na, 125))
+    na_clamp <- 137 - min(137, max(na, 125))
     return(original_score + 1.32*na_clamp - 0.033*original_score*na_clamp)
   }
   return(original_score)
@@ -38,13 +38,13 @@ meld_na <- function(creatinine, bilirubin, inr, na) {
 #' @returns score (number)
 meld_3 <- function(gender, bilirubin, na, inr, creatinine, albumin) {
   return ( 1.33 * gender + 
-           4.56 * log(pmax(1, bilirubin)) + 
-           0.82 * (137 - min(137, pmax(na, 125))) - 
-           0.24 * (137 - min(137, pmax(na, 125))) * log(pmax(1, bilirubin)) + 
-           9.09 * log(pmax(1, inr)) + 
-          11.14 * log(pmax(1, min(3, creatinine))) + 
-           1.85 * (3.5 - pmax(min(albumin, 3.5), 1.5)) - 
-           1.83 * (3.5 - pmax(min(albumin, 3.5), 1.5)) * log(pmax(1, min(3, creatinine))) + 
+           4.56 * log(max(1, bilirubin)) + 
+           0.82 * (137 - min(137, max(na, 125))) - 
+           0.24 * (137 - min(137, max(na, 125))) * log(max(1, bilirubin)) + 
+           9.09 * log(max(1, inr)) + 
+          11.14 * log(max(1, min(3, creatinine))) + 
+           1.85 * (3.5 - max(min(albumin, 3.5), 1.5)) - 
+           1.83 * (3.5 - max(min(albumin, 3.5), 1.5)) * log(max(1, min(3, creatinine))) + 
               6)
 }
 
